@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unix 时间戳转换器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Unix 时间戳转换器</h1>
+        <div class="header-controls">
+            <button id="knowledgeBtn" class="icon-btn" title="知识中心">📚</button>
+            <button id="codeBtn" class="icon-btn" title="代码示例">💻</button>
+            <button id="themeToggle" class="icon-btn" title="切换主题">☀️</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- 当前时间模块 -->
+        <section class="current-time">
+            <h2>当前时间</h2>
+            <div class="time-display">
+                <div class="time-item">
+                    <label>Unix 时间戳 (秒)</label>
+                    <div class="time-value" id="currentTimestamp"></div>
+                </div>
+                <div class="time-item">
+                    <label>Unix 时间戳 (毫秒)</label>
+                    <div class="time-value" id="currentTimestampMs"></div>
+                </div>
+                <div class="time-item">
+                    <label>本地时间</label>
+                    <div class="time-value" id="currentLocalTime"></div>
+                </div>
+                <div class="time-item">
+                    <label>UTC 时间</label>
+                    <div class="time-value" id="currentUtcTime"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主转换器 -->
+        <section class="converter">
+            <div class="tabs">
+                <button class="tab active" data-tab="smart">智能转换</button>
+                <button class="tab" data-tab="batch">批量转换</button>
+            </div>
+
+            <!-- 智能转换标签页 -->
+            <div id="smartTab" class="tab-content active">
+                <div class="input-group">
+                    <label for="smartInput">输入时间戳或日期字符串</label>
+                    <input type="text" id="smartInput" placeholder="例如: 1735689600 或 2025-01-01 08:00:00">
+                    <div class="input-hint" id="smartHint"></div>
+                </div>
+
+                <div class="format-selector">
+                    <label for="formatSelect">输出格式</label>
+                    <select id="formatSelect">
+                        <option value="default">默认格式</option>
+                        <option value="iso">ISO 8601</option>
+                        <option value="rfc">RFC 2822</option>
+                        <option value="local-long">本地化长日期</option>
+                        <option value="local-short">本地化短日期</option>
+                    </select>
+                </div>
+
+                <div class="output-grid">
+                    <div class="output-item">
+                        <label>本地时间</label>
+                        <div class="output-value" id="localTimeOutput"></div>
+                        <button class="copy-btn" data-copy="localTimeOutput">复制</button>
+                    </div>
+                    <div class="output-item">
+                        <label>UTC 时间</label>
+                        <div class="output-value" id="utcTimeOutput"></div>
+                        <button class="copy-btn" data-copy="utcTimeOutput">复制</button>
+                    </div>
+                    <div class="output-item">
+                        <label>时间戳 (秒)</label>
+                        <div class="output-value" id="timestampSecOutput"></div>
+                        <button class="copy-btn" data-copy="timestampSecOutput">复制</button>
+                    </div>
+                    <div class="output-item">
+                        <label>时间戳 (毫秒)</label>
+                        <div class="output-value" id="timestampMsOutput"></div>
+                        <button class="copy-btn" data-copy="timestampMsOutput">复制</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 批量转换标签页 -->
+            <div id="batchTab" class="tab-content">
+                <div class="batch-container">
+                    <div class="batch-input">
+                        <label for="batchInput">输入时间戳（每行一个）</label>
+                        <textarea id="batchInput" placeholder="1735689600&#10;1735776000&#10;1735862400000"></textarea>
+                        <button id="batchConvert" class="convert-btn">批量转换</button>
+                    </div>
+                    <div class="batch-output">
+                        <label for="batchOutput">转换结果</label>
+                        <textarea id="batchOutput" readonly></textarea>
+                        <button class="copy-btn" data-copy="batchOutput">复制全部</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 知识中心模态框 -->
+    <div id="knowledgeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>知识中心</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-tabs">
+                <button class="modal-tab active" data-modal-tab="concepts">核心概念</button>
+                <button class="modal-tab" data-modal-tab="examples">代码示例</button>
+            </div>
+            <div class="modal-body">
+                <div id="conceptsTab" class="modal-tab-content active">
+                    <h3>什么是Unix时间戳？</h3>
+                    <p>Unix时间戳是从1970年1月1日00:00:00 UTC（被称为"Unix纪元"或"Epoch"）开始所经过的秒数。它是一个标准的时间表示方法，广泛用于计算机系统中。</p>
+                    
+                    <h3>UTC vs GMT</h3>
+                    <p>UTC（协调世界时）是现代标准时间，而GMT（格林威治标准时间）是历史标准。在日常使用中，两者基本相同，但UTC更加精确，是基于原子钟的。</p>
+                    
+                    <h3>时区 (Timezone)</h3>
+                    <p>时区是地球上使用相同标准时间的区域。不同时区相对于UTC有不同的偏移量，例如中国标准时间是UTC+8。</p>
+                    
+                    <h3>闰秒</h3>
+                    <p>闰秒是为了补偿地球自转速度变化而偶尔添加的额外秒数。在大多数计算机系统中，闰秒通常被忽略。</p>
+                </div>
+                <div id="examplesTab" class="modal-tab-content">
+                    <h3>获取当前Unix时间戳的代码示例</h3>
+                    <div class="code-examples">
+                        <div class="code-example">
+                            <h4>JavaScript</h4>
+                            <pre><code>// 获取当前时间戳（秒）
+const timestampSec = Math.floor(Date.now() / 1000);
+
+// 获取当前时间戳（毫秒）
+const timestampMs = Date.now();</code></pre>
+                            <button class="copy-btn" data-copy-code="js">复制</button>
+                        </div>
+                        <div class="code-example">
+                            <h4>Python</h4>
+                            <pre><code>import time
+
+# 获取当前时间戳（秒）
+timestamp_sec = int(time.time())
+
+# 获取当前时间戳（毫秒）
+timestamp_ms = int(time.time() * 1000)</code></pre>
+                            <button class="copy-btn" data-copy-code="python">复制</button>
+                        </div>
+                        <div class="code-example">
+                            <h4>Java</h4>
+                            <pre><code>// 获取当前时间戳（秒）
+long timestampSec = System.currentTimeMillis() / 1000;
+
+// 获取当前时间戳（毫秒）
+long timestampMs = System.currentTimeMillis();</code></pre>
+                            <button class="copy-btn" data-copy-code="java">复制</button>
+                        </div>
+                        <div class="code-example">
+                            <h4>C++</h4>
+                            <pre><code>#include &lt;chrono&gt;
+
+// 获取当前时间戳（秒）
+auto timestampSec = std::chrono::duration_cast&lt;std::chrono::seconds&gt;
+    (std::chrono::system_clock::now().time_since_epoch()).count();
+
+// 获取当前时间戳（毫秒）
+auto timestampMs = std::chrono::duration_cast&lt;std::chrono::milliseconds&gt;
+    (std::chrono::system_clock::now().time_since_epoch()).count();</code></pre>
+                            <button class="copy-btn" data-copy-code="cpp">复制</button>
+                        </div>
+                        <div class="code-example">
+                            <h4>C#</h4>
+                            <pre><code>// 获取当前时间戳（秒）
+long timestampSec = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+
+// 获取当前时间戳（毫秒）
+long timestampMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();</code></pre>
+                            <button class="copy-btn" data-copy-code="csharp">复制</button>
+                        </div>
+                        <div class="code-example">
+                            <h4>Go</h4>
+                            <pre><code>package main
+
+import "time"
+
+// 获取当前时间戳（秒）
+timestampSec := time.Now().Unix()
+
+// 获取当前时间戳（毫秒）
+timestampMs := time.Now().UnixMilli()</code></pre>
+                            <button class="copy-btn" data-copy-code="go">复制</button>
+                        </div>
+                        <div class="code-example">
+                            <h4>PHP</h4>
+                            <pre><code>&lt;?php
+// 获取当前时间戳（秒）
+$timestampSec = time();
+
+// 获取当前时间戳（毫秒）
+$timestampMs = round(microtime(true) * 1000);
+?&gt;</code></pre>
+                            <button class="copy-btn" data-copy-code="php">复制</button>
+                        </div>
+                        <div class="code-example">
+                            <h4>Rust</h4>
+                            <pre><code>use std::time::{SystemTime, UNIX_EPOCH};
+
+// 获取当前时间戳（秒）
+let timestamp_sec = SystemTime::now()
+    .duration_since(UNIX_EPOCH)
+    .unwrap()
+    .as_secs();
+
+// 获取当前时间戳（毫秒）
+let timestamp_ms = SystemTime::now()
+    .duration_since(UNIX_EPOCH)
+    .unwrap()
+    .as_millis();</code></pre>
+                            <button class="copy-btn" data-copy-code="rust">复制</button>
+                        </div>
+                        <div class="code-example">
+                            <h4>Shell (Bash)</h4>
+                            <pre><code># 获取当前时间戳（秒）
+timestamp_sec=$(date +%s)
+
+# 获取当前时间戳（毫秒）
+timestamp_ms=$(date +%s%3N)</code></pre>
+                            <button class="copy-btn" data-copy-code="shell">复制</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Your Brand | Client-side Tool for Developers</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
