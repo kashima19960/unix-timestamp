@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unix 时间戳转换器</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header class="header">
         <h1>Unix 时间戳转换器</h1>
@@ -126,13 +128,13 @@
                 <div id="conceptsTab" class="modal-tab-content active">
                     <h3>什么是Unix时间戳？</h3>
                     <p>Unix时间戳是从1970年1月1日00:00:00 UTC（被称为"Unix纪元"或"Epoch"）开始所经过的秒数。它是一个标准的时间表示方法，广泛用于计算机系统中。</p>
-                    
+
                     <h3>UTC vs GMT</h3>
                     <p>UTC（协调世界时）是现代标准时间，而GMT（格林威治标准时间）是历史标准。在日常使用中，两者基本相同，但UTC更加精确，是基于原子钟的。</p>
-                    
+
                     <h3>时区 (Timezone)</h3>
                     <p>时区是地球上使用相同标准时间的区域。不同时区相对于UTC有不同的偏移量，例如中国标准时间是UTC+8。</p>
-                    
+
                     <h3>闰秒</h3>
                     <p>闰秒是为了补偿地球自转速度变化而偶尔添加的额外秒数。在大多数计算机系统中，闰秒通常被忽略。</p>
                 </div>
@@ -316,9 +318,10 @@ SELECT DATEDIFF(SECOND, '1970-01-01', GETUTCDATE()) AS timestamp_sec;</code></pr
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 Your Brand | Client-side Tool for Developers</p>
+        <p>&copy; 2025 MRZ | Client-side Tool for Developers</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>

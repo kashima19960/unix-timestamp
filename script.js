@@ -6,7 +6,7 @@ class UnixTimestampConverter {
         this.startCurrentTimeUpdate();
         this.initializeTabs();
         this.initializeModal();
-        
+
         // 时间更新控制
         this.isPaused = false;
         this.updateInterval = null;
@@ -109,7 +109,7 @@ class UnixTimestampConverter {
     startCurrentTimeUpdate() {
         const updateCurrentTime = () => {
             let now;
-            
+
             if (this.isPaused && this.pausedTime) {
                 // 如果暂停，使用暂停时的时间
                 now = this.pausedTime;
@@ -121,7 +121,7 @@ class UnixTimestampConverter {
                     this.pausedTime = null;
                 }
             }
-            
+
             const timestampSec = Math.floor(now.getTime() / 1000);
             const timestampMs = now.getTime();
 
@@ -158,7 +158,7 @@ class UnixTimestampConverter {
         if (isNaN(num) || num < 0) return { success: false };
 
         const str = String(Math.floor(num));
-        
+
         // 扩展时间戳格式支持
         if (str.length === 10) {
             // 标准32位秒级时间戳 (1970-2038)
@@ -183,7 +183,7 @@ class UnixTimestampConverter {
             // 微秒级或纳秒级时间戳
             let divisor = 1;
             let typeDesc = '';
-            
+
             if (str.length >= 16 && str.length <= 18) {
                 // 微秒级 (16-18位)
                 divisor = 1000000;
@@ -193,16 +193,16 @@ class UnixTimestampConverter {
                 divisor = 1000000000;
                 typeDesc = '纳秒级';
             }
-            
+
             const timestamp = num / divisor;
             const testDate = new Date(timestamp * 1000);
             const year = testDate.getFullYear();
-            
+
             if (year >= 1970 && year <= 9999 && !isNaN(testDate.getTime())) {
                 return { success: true, timestamp: timestamp, type: `${typeDesc} (${year}年)` };
             }
         }
-        
+
         return { success: false };
     }
 
@@ -227,7 +227,7 @@ class UnixTimestampConverter {
             const match = input.match(patterns[i]);
             if (match) {
                 let year, month, day, hour = 0, minute = 0, second = 0;
-                
+
                 if (i <= 1) { // YYYY-MM-DD or YYYY/MM/DD format
                     [, year, month, day, hour = 0, minute = 0, second = 0] = match;
                 } else if (i === 2) { // MM-DD-YYYY format
@@ -271,7 +271,7 @@ class UnixTimestampConverter {
                 }
 
                 const date = new Date(yearNum, monthNum - 1, dayNum, hourNum, minuteNum, secondNum);
-                
+
                 if (!isNaN(date.getTime())) {
                     // 检查Unix时间戳是否为负数
                     const timestamp = date.getTime() / 1000;
@@ -279,10 +279,10 @@ class UnixTimestampConverter {
                         // 对于Unix Epoch边界情况，提供UTC解释选项
                         const utcDate = new Date(Date.UTC(yearNum, monthNum - 1, dayNum, hourNum, minuteNum, secondNum));
                         const utcTimestamp = utcDate.getTime() / 1000;
-                        
+
                         if (utcTimestamp >= 0) {
-                            return { 
-                                success: true, 
+                            return {
+                                success: true,
                                 date: utcDate,
                                 isUtcAdjusted: true,
                                 originalTimestamp: timestamp,
@@ -292,7 +292,7 @@ class UnixTimestampConverter {
                             return { success: false, error: '日期早于Unix纪元(1970-01-01 00:00:00 UTC)' };
                         }
                     }
-                    
+
                     return { success: true, date };
                 }
             }
@@ -313,7 +313,7 @@ class UnixTimestampConverter {
 
     handleSmartInput() {
         const input = this.smartInput.value.trim();
-        
+
         if (!input) {
             this.clearOutputs();
             this.smartHint.textContent = '';
@@ -334,12 +334,12 @@ class UnixTimestampConverter {
         const dateResult = this.parseDate(input);
         if (dateResult.success) {
             this.displayDateResult(dateResult.date);
-            
+
             let hintText = `解析为日期时间: ${dateResult.date.toLocaleString()}`;
             if (dateResult.isUtcAdjusted) {
                 hintText += ` (已调整为UTC时间，原本地时间戳为: ${dateResult.originalTimestamp})`;
             }
-            
+
             this.smartHint.textContent = hintText;
             this.smartHint.className = 'input-hint success';
             return;
@@ -373,33 +373,33 @@ class UnixTimestampConverter {
 
     formatDateTime(date, timezone, format = 'default') {
         const options = { timeZone: timezone === 'utc' ? 'UTC' : undefined };
-        
+
         switch (format) {
             case 'iso':
                 return timezone === 'utc' ? date.toISOString() : date.toISOString().replace('Z', this.getTimezoneOffset(date));
             case 'rfc':
                 return date.toString();
             case 'local-long':
-                return date.toLocaleDateString('zh-CN', { 
+                return date.toLocaleDateString('zh-CN', {
                     ...options,
-                    year: 'numeric', 
-                    month: 'long', 
+                    year: 'numeric',
+                    month: 'long',
                     day: 'numeric',
                     hour: '2-digit',
                     minute: '2-digit',
                     second: '2-digit'
                 });
             case 'local-short':
-                return date.toLocaleDateString('zh-CN', { 
+                return date.toLocaleDateString('zh-CN', {
                     ...options,
-                    year: '2-digit', 
-                    month: '2-digit', 
+                    year: '2-digit',
+                    month: '2-digit',
                     day: '2-digit',
                     hour: '2-digit',
                     minute: '2-digit'
                 });
             default:
-                return timezone === 'utc' 
+                return timezone === 'utc'
                     ? date.toISOString().replace('T', ' ').replace('Z', ' UTC')
                     : date.toLocaleString('zh-CN', { hour12: false });
         }
@@ -438,19 +438,19 @@ class UnixTimestampConverter {
                 if (result.timestamp < 0) {
                     return `错误: 时间戳 "${trimmed}" 早于Unix纪元`;
                 }
-                
+
                 // 检查是否超出JavaScript Date对象的安全范围
                 const maxSafeTimestamp = 8640000000000; // JavaScript Date的最大安全时间戳(秒)
                 if (result.timestamp > maxSafeTimestamp) {
                     return `错误: 时间戳 "${trimmed}" 超出JavaScript Date对象安全范围`;
                 }
-                
+
                 // 对于超出2038年的时间戳给出信息提示
-                if (result.timestamp > 2147483647) { 
+                if (result.timestamp > 2147483647) {
                     const date = new Date(result.timestamp * 1000);
                     return `${this.formatDateTime(date, 'local')} (64位时间戳, 超出32位范围)`;
                 }
-                
+
                 const date = new Date(result.timestamp * 1000);
                 return this.formatDateTime(date, 'local');
             }
@@ -477,7 +477,7 @@ class UnixTimestampConverter {
                 const originalText = btn.textContent;
                 btn.textContent = '已复制';
                 btn.classList.add('success');
-                
+
                 setTimeout(() => {
                     btn.textContent = originalText;
                     btn.classList.remove('success');
@@ -490,7 +490,7 @@ class UnixTimestampConverter {
 
     switchTab(event) {
         const tabName = event.target.dataset.tab;
-        
+
         // 更新标签状态
         document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
         event.target.classList.add('active');
@@ -509,11 +509,11 @@ class UnixTimestampConverter {
     openModal(tab = 'concepts') {
         this.knowledgeModal.style.display = 'block';
         document.body.style.overflow = 'hidden';
-        
+
         // 切换到指定标签页
         document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.modal-tab-content').forEach(c => c.classList.remove('active'));
-        
+
         document.querySelector(`.modal-tab[data-modal-tab="${tab}"]`).classList.add('active');
         document.getElementById(`${tab}Tab`).classList.add('active');
     }
@@ -525,7 +525,7 @@ class UnixTimestampConverter {
 
     switchModalTab(event) {
         const tabName = event.target.dataset.modalTab;
-        
+
         // 更新标签状态
         document.querySelectorAll('.modal-tab').forEach(tab => tab.classList.remove('active'));
         event.target.classList.add('active');
