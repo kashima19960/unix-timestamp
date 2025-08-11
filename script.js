@@ -6,6 +6,11 @@ class UnixTimestampConverter {
         this.startCurrentTimeUpdate();
         this.initializeTabs();
         this.initializeModal();
+        
+        // 时间更新控制
+        this.isPaused = false;
+        this.updateInterval = null;
+        this.pausedTime = null;
     }
 
     initializeElements() {
@@ -14,6 +19,7 @@ class UnixTimestampConverter {
         this.currentTimestampMs = document.getElementById('currentTimestampMs');
         this.currentLocalTime = document.getElementById('currentLocalTime');
         this.currentUtcTime = document.getElementById('currentUtcTime');
+        this.pauseBtn = document.getElementById('pauseBtn');
 
         // 智能转换元素
         this.smartInput = document.getElementById('smartInput');
@@ -41,6 +47,9 @@ class UnixTimestampConverter {
     bindEvents() {
         // 主题切换
         this.themeToggle.addEventListener('click', () => this.toggleTheme());
+
+        // 时间暂停/恢复
+        this.pauseBtn.addEventListener('click', () => this.togglePause());
 
         // 智能输入处理
         this.smartInput.addEventListener('input', () => this.handleSmartInput());
@@ -99,7 +108,20 @@ class UnixTimestampConverter {
 
     startCurrentTimeUpdate() {
         const updateCurrentTime = () => {
-            const now = new Date();
+            let now;
+            
+            if (this.isPaused && this.pausedTime) {
+                // 如果暂停，使用暂停时的时间
+                now = this.pausedTime;
+            } else {
+                // 正常情况使用当前时间
+                now = new Date();
+                // 如果刚从暂停状态恢复，更新暂停时间为null
+                if (!this.isPaused) {
+                    this.pausedTime = null;
+                }
+            }
+            
             const timestampSec = Math.floor(now.getTime() / 1000);
             const timestampMs = now.getTime();
 
@@ -110,7 +132,25 @@ class UnixTimestampConverter {
         };
 
         updateCurrentTime();
-        setInterval(updateCurrentTime, 1000);
+        this.updateInterval = setInterval(updateCurrentTime, 1000);
+    }
+
+    togglePause() {
+        if (this.isPaused) {
+            // 恢复计时
+            this.isPaused = false;
+            this.pausedTime = null;
+            this.pauseBtn.textContent = '⏸️';
+            this.pauseBtn.title = '暂停时间更新';
+            this.pauseBtn.classList.remove('paused');
+        } else {
+            // 暂停计时
+            this.isPaused = true;
+            this.pausedTime = new Date(); // 记录暂停时的确切时间
+            this.pauseBtn.textContent = '▶️';
+            this.pauseBtn.title = '恢复时间更新';
+            this.pauseBtn.classList.add('paused');
+        }
     }
 
     parseTimestamp(input) {
