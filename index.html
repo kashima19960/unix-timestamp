@@ -10,11 +10,12 @@
 
 <body>
     <header class="header">
-        <h1>Unix 时间戳转换器</h1>
+        <h1 data-i18n="app.title">Unix 时间戳转换器</h1>
         <div class="header-controls">
-            <button id="knowledgeBtn" class="icon-btn" title="知识中心">📚</button>
-            <button id="codeBtn" class="icon-btn" title="代码示例">💻</button>
-            <button id="themeToggle" class="icon-btn" title="切换主题">☀️</button>
+            <button id="knowledgeBtn" class="icon-btn" data-i18n-title="header.knowledge" title="知识中心">📚</button>
+            <button id="codeBtn" class="icon-btn" data-i18n-title="header.code" title="代码示例">💻</button>
+            <button id="languageToggle" class="icon-btn" data-i18n-title="header.language" title="切换语言">🌐</button>
+            <button id="themeToggle" class="icon-btn" data-i18n-title="header.theme" title="切换主题">☀️</button>
         </div>
     </header>
 
@@ -22,24 +23,24 @@
         <!-- 当前时间模块 -->
         <section class="current-time">
             <div class="current-time-header">
-                <h2>当前时间</h2>
-                <button id="pauseBtn" class="pause-btn" title="暂停时间更新">⏸️</button>
+                <h2 data-i18n="current.title">当前时间</h2>
+                <button id="pauseBtn" class="pause-btn" data-i18n-title="current.pause" title="暂停时间更新">⏸️</button>
             </div>
             <div class="time-display">
                 <div class="time-item">
-                    <label>Unix 时间戳 (秒)</label>
+                    <label data-i18n="current.timestamp_sec">Unix 时间戳 (秒)</label>
                     <div class="time-value" id="currentTimestamp"></div>
                 </div>
                 <div class="time-item">
-                    <label>Unix 时间戳 (毫秒)</label>
+                    <label data-i18n="current.timestamp_ms">Unix 时间戳 (毫秒)</label>
                     <div class="time-value" id="currentTimestampMs"></div>
                 </div>
                 <div class="time-item">
-                    <label>本地时间</label>
+                    <label data-i18n="current.local_time">本地时间</label>
                     <div class="time-value" id="currentLocalTime"></div>
                 </div>
                 <div class="time-item">
-                    <label>UTC 时间</label>
+                    <label data-i18n="current.utc_time">UTC 时间</label>
                     <div class="time-value" id="currentUtcTime"></div>
                 </div>
             </div>
@@ -48,49 +49,49 @@
         <!-- 主转换器 -->
         <section class="converter">
             <div class="tabs">
-                <button class="tab active" data-tab="smart">智能转换</button>
-                <button class="tab" data-tab="batch">批量转换</button>
+                <button class="tab active" data-tab="smart" data-i18n="tabs.smart">智能转换</button>
+                <button class="tab" data-tab="batch" data-i18n="tabs.batch">批量转换</button>
             </div>
 
             <!-- 智能转换标签页 -->
             <div id="smartTab" class="tab-content active">
                 <div class="input-group">
-                    <label for="smartInput">输入时间戳或日期字符串</label>
-                    <input type="text" id="smartInput" placeholder="例如: 1735689600 或 2025-01-01 08:00:00">
+                    <label for="smartInput" data-i18n="smart.input_label">输入时间戳或日期字符串</label>
+                    <input type="text" id="smartInput" data-i18n-placeholder="smart.input_placeholder" placeholder="例如: 1735689600 或 2025-01-01 08:00:00">
                     <div class="input-hint" id="smartHint"></div>
                 </div>
 
                 <div class="format-selector">
-                    <label for="formatSelect">输出格式</label>
+                    <label for="formatSelect" data-i18n="smart.format_label">输出格式</label>
                     <select id="formatSelect">
-                        <option value="default">默认格式</option>
-                        <option value="iso">ISO 8601</option>
-                        <option value="rfc">RFC 2822</option>
-                        <option value="local-long">本地化长日期</option>
-                        <option value="local-short">本地化短日期</option>
+                        <option value="default" data-i18n="smart.format_default">默认格式</option>
+                        <option value="iso" data-i18n="smart.format_iso">ISO 8601</option>
+                        <option value="rfc" data-i18n="smart.format_rfc">RFC 2822</option>
+                        <option value="local-long" data-i18n="smart.format_long">本地化长日期</option>
+                        <option value="local-short" data-i18n="smart.format_short">本地化短日期</option>
                     </select>
                 </div>
 
                 <div class="output-grid">
                     <div class="output-item">
-                        <label>本地时间</label>
+                        <label data-i18n="smart.local_time">本地时间</label>
                         <div class="output-value" id="localTimeOutput"></div>
-                        <button class="copy-btn" data-copy="localTimeOutput">复制</button>
+                        <button class="copy-btn" data-copy="localTimeOutput" data-i18n="smart.copy">复制</button>
                     </div>
                     <div class="output-item">
-                        <label>UTC 时间</label>
+                        <label data-i18n="smart.utc_time">UTC 时间</label>
                         <div class="output-value" id="utcTimeOutput"></div>
-                        <button class="copy-btn" data-copy="utcTimeOutput">复制</button>
+                        <button class="copy-btn" data-copy="utcTimeOutput" data-i18n="smart.copy">复制</button>
                     </div>
                     <div class="output-item">
-                        <label>时间戳 (秒)</label>
+                        <label data-i18n="smart.timestamp_sec">时间戳 (秒)</label>
                         <div class="output-value" id="timestampSecOutput"></div>
-                        <button class="copy-btn" data-copy="timestampSecOutput">复制</button>
+                        <button class="copy-btn" data-copy="timestampSecOutput" data-i18n="smart.copy">复制</button>
                     </div>
                     <div class="output-item">
-                        <label>时间戳 (毫秒)</label>
+                        <label data-i18n="smart.timestamp_ms">时间戳 (毫秒)</label>
                         <div class="output-value" id="timestampMsOutput"></div>
-                        <button class="copy-btn" data-copy="timestampMsOutput">复制</button>
+                        <button class="copy-btn" data-copy="timestampMsOutput" data-i18n="smart.copy">复制</button>
                     </div>
                 </div>
             </div>
@@ -99,14 +100,14 @@
             <div id="batchTab" class="tab-content">
                 <div class="batch-container">
                     <div class="batch-input">
-                        <label for="batchInput">输入时间戳（每行一个）</label>
-                        <textarea id="batchInput" placeholder="1735689600&#10;1735776000&#10;1735862400000"></textarea>
-                        <button id="batchConvert" class="convert-btn">批量转换</button>
+                        <label for="batchInput" data-i18n="batch.input_label">输入时间戳（每行一个）</label>
+                        <textarea id="batchInput" data-i18n-placeholder="batch.input_placeholder" placeholder="1735689600&#10;1735776000&#10;1735862400000"></textarea>
+                        <button id="batchConvert" class="convert-btn" data-i18n="batch.convert">批量转换</button>
                     </div>
                     <div class="batch-output">
-                        <label for="batchOutput">转换结果</label>
+                        <label for="batchOutput" data-i18n="batch.output_label">转换结果</label>
                         <textarea id="batchOutput" readonly></textarea>
-                        <button class="copy-btn" data-copy="batchOutput">复制全部</button>
+                        <button class="copy-btn" data-copy="batchOutput" data-i18n="batch.copy_all">复制全部</button>
                     </div>
                 </div>
             </div>
@@ -117,29 +118,29 @@
     <div id="knowledgeModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>知识中心</h2>
+                <h2 data-i18n="modal.title">知识中心</h2>
                 <button class="close-btn">&times;</button>
             </div>
             <div class="modal-tabs">
-                <button class="modal-tab active" data-modal-tab="concepts">核心概念</button>
-                <button class="modal-tab" data-modal-tab="examples">代码示例</button>
+                <button class="modal-tab active" data-modal-tab="concepts" data-i18n="modal.concepts">核心概念</button>
+                <button class="modal-tab" data-modal-tab="examples" data-i18n="modal.examples">代码示例</button>
             </div>
             <div class="modal-body">
                 <div id="conceptsTab" class="modal-tab-content active">
-                    <h3>什么是Unix时间戳？</h3>
-                    <p>Unix时间戳是从1970年1月1日00:00:00 UTC（被称为"Unix纪元"或"Epoch"）开始所经过的秒数。它是一个标准的时间表示方法，广泛用于计算机系统中。</p>
+                    <h3 data-i18n="concepts.unix_title">什么是Unix时间戳？</h3>
+                    <p data-i18n="concepts.unix_desc">Unix时间戳是从1970年1月1日00:00:00 UTC（被称为"Unix纪元"或"Epoch"）开始所经过的秒数。它是一个标准的时间表示方法，广泛用于计算机系统中。</p>
 
-                    <h3>UTC vs GMT</h3>
-                    <p>UTC（协调世界时）是现代标准时间，而GMT（格林威治标准时间）是历史标准。在日常使用中，两者基本相同，但UTC更加精确，是基于原子钟的。</p>
+                    <h3 data-i18n="concepts.utc_title">UTC vs GMT</h3>
+                    <p data-i18n="concepts.utc_desc">UTC（协调世界时）是现代标准时间，而GMT（格林威治标准时间）是历史标准。在日常使用中，两者基本相同，但UTC更加精确，是基于原子钟的。</p>
 
-                    <h3>时区 (Timezone)</h3>
-                    <p>时区是地球上使用相同标准时间的区域。不同时区相对于UTC有不同的偏移量，例如中国标准时间是UTC+8。</p>
+                    <h3 data-i18n="concepts.timezone_title">时区 (Timezone)</h3>
+                    <p data-i18n="concepts.timezone_desc">时区是地球上使用相同标准时间的区域。不同时区相对于UTC有不同的偏移量，例如中国标准时间是UTC+8。</p>
 
-                    <h3>闰秒</h3>
-                    <p>闰秒是为了补偿地球自转速度变化而偶尔添加的额外秒数。在大多数计算机系统中，闰秒通常被忽略。</p>
+                    <h3 data-i18n="concepts.leap_title">闰秒</h3>
+                    <p data-i18n="concepts.leap_desc">闰秒是为了补偿地球自转速度变化而偶尔添加的额外秒数。在大多数计算机系统中，闰秒通常被忽略。</p>
                 </div>
                 <div id="examplesTab" class="modal-tab-content">
-                    <h3>获取当前Unix时间戳的代码示例</h3>
+                    <h3 data-i18n="examples.title">获取当前Unix时间戳的代码示例</h3>
                     <div class="code-examples">
                         <div class="code-example">
                             <h4>Python</h4>
@@ -318,7 +319,7 @@ SELECT DATEDIFF(SECOND, '1970-01-01', GETUTCDATE()) AS timestamp_sec;</code></pr
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 MRZ | Client-side Tool for Developers</p>
+        <p data-i18n="footer.copyright">&copy; 2025 MRZ | Client-side Tool for Developers</p>
     </footer>
 
     <script src="script.js"></script>

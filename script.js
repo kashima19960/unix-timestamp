@@ -1,16 +1,198 @@
+// 多语言数据
+const i18nData = {
+    zh: {
+        app: {
+            title: 'Unix 时间戳转换器'
+        },
+        header: {
+            knowledge: '知识中心',
+            code: '代码示例',
+            language: '切换语言',
+            theme: '切换主题'
+        },
+        current: {
+            title: '当前时间',
+            pause: '暂停时间更新',
+            resume: '恢复时间更新',
+            timestamp_sec: 'Unix 时间戳 (秒)',
+            timestamp_ms: 'Unix 时间戳 (毫秒)',
+            local_time: '本地时间',
+            utc_time: 'UTC 时间'
+        },
+        tabs: {
+            smart: '智能转换',
+            batch: '批量转换'
+        },
+        smart: {
+            input_label: '输入时间戳或日期字符串',
+            input_placeholder: '例如: 1735689600 或 2025-01-01 08:00:00',
+            format_label: '输出格式',
+            format_default: '默认格式',
+            format_iso: 'ISO 8601',
+            format_rfc: 'RFC 2822',
+            format_long: '本地化长日期',
+            format_short: '本地化短日期',
+            local_time: '本地时间',
+            utc_time: 'UTC 时间',
+            timestamp_sec: '时间戳 (秒)',
+            timestamp_ms: '时间戳 (毫秒)',
+            copy: '复制'
+        },
+        batch: {
+            input_label: '输入时间戳（每行一个）',
+            input_placeholder: '1735689600\n1735776000\n1735862400000',
+            output_label: '转换结果',
+            convert: '批量转换',
+            copy_all: '复制全部'
+        },
+        modal: {
+            title: '知识中心',
+            concepts: '核心概念',
+            examples: '代码示例'
+        },
+        concepts: {
+            unix_title: '什么是Unix时间戳？',
+            unix_desc: 'Unix时间戳是从1970年1月1日00:00:00 UTC（被称为"Unix纪元"或"Epoch"）开始所经过的秒数。它是一个标准的时间表示方法，广泛用于计算机系统中。',
+            utc_title: 'UTC vs GMT',
+            utc_desc: 'UTC（协调世界时）是现代标准时间，而GMT（格林威治标准时间）是历史标准。在日常使用中，两者基本相同，但UTC更加精确，是基于原子钟的。',
+            timezone_title: '时区 (Timezone)',
+            timezone_desc: '时区是地球上使用相同标准时间的区域。不同时区相对于UTC有不同的偏移量，例如中国标准时间是UTC+8。',
+            leap_title: '闰秒',
+            leap_desc: '闰秒是为了补偿地球自转速度变化而偶尔添加的额外秒数。在大多数计算机系统中，闰秒通常被忽略。'
+        },
+        examples: {
+            title: '获取当前Unix时间戳的代码示例'
+        },
+        footer: {
+            copyright: '© 2025 MRZ | 开发者客户端工具'
+        },
+        messages: {
+            copied: '已复制',
+            parse_timestamp_sec: '解析为秒级时间戳',
+            parse_timestamp_ms: '解析为毫秒级时间戳',
+            parse_timestamp_sec_32: '解析为秒级 (32位兼容) 时间戳',
+            parse_date: '解析为日期时间',
+            parse_error: '无法解析输入内容，请检查格式',
+            error_before_epoch: '日期早于Unix纪元(1970-01-01 00:00:00 UTC)',
+            error_invalid_format: '无法识别的日期格式',
+            error_year_range: '年份应在1970-9999范围内 (64位时间戳支持)',
+            error_month_range: '月份应在1-12范围内',
+            error_day_range: '日期应在1-31范围内',
+            error_hour_range: '小时应在0-23范围内',
+            error_minute_range: '分钟应在0-59范围内',
+            error_second_range: '秒数应在0-59范围内',
+            batch_error_before_epoch: '错误: 时间戳 "{0}" 早于Unix纪元',
+            batch_error_out_of_range: '错误: 时间戳 "{0}" 超出JavaScript Date对象安全范围',
+            batch_error_cannot_parse: '错误: 无法解析 "{0}"',
+            batch_64bit_note: '(64位时间戳, 超出32位范围)'
+        }
+    },
+    en: {
+        app: {
+            title: 'Unix Timestamp Converter'
+        },
+        header: {
+            knowledge: 'Knowledge Center',
+            code: 'Code Examples',
+            language: 'Switch Language',
+            theme: 'Toggle Theme'
+        },
+        current: {
+            title: 'Current Time',
+            pause: 'Pause time update',
+            resume: 'Resume time update',
+            timestamp_sec: 'Unix Timestamp (seconds)',
+            timestamp_ms: 'Unix Timestamp (milliseconds)',
+            local_time: 'Local Time',
+            utc_time: 'UTC Time'
+        },
+        tabs: {
+            smart: 'Smart Convert',
+            batch: 'Batch Convert'
+        },
+        smart: {
+            input_label: 'Enter timestamp or date string',
+            input_placeholder: 'e.g: 1735689600 or 2025-01-01 08:00:00',
+            format_label: 'Output Format',
+            format_default: 'Default Format',
+            format_iso: 'ISO 8601',
+            format_rfc: 'RFC 2822',
+            format_long: 'Localized Long Date',
+            format_short: 'Localized Short Date',
+            local_time: 'Local Time',
+            utc_time: 'UTC Time',
+            timestamp_sec: 'Timestamp (seconds)',
+            timestamp_ms: 'Timestamp (milliseconds)',
+            copy: 'Copy'
+        },
+        batch: {
+            input_label: 'Enter timestamps (one per line)',
+            input_placeholder: '1735689600\n1735776000\n1735862400000',
+            output_label: 'Conversion Results',
+            convert: 'Batch Convert',
+            copy_all: 'Copy All'
+        },
+        modal: {
+            title: 'Knowledge Center',
+            concepts: 'Core Concepts',
+            examples: 'Code Examples'
+        },
+        concepts: {
+            unix_title: 'What is Unix Timestamp?',
+            unix_desc: 'Unix timestamp is the number of seconds that have elapsed since January 1, 1970, 00:00:00 UTC (known as "Unix Epoch"). It is a standard time representation method widely used in computer systems.',
+            utc_title: 'UTC vs GMT',
+            utc_desc: 'UTC (Coordinated Universal Time) is the modern standard time, while GMT (Greenwich Mean Time) is the historical standard. In daily use, the two are basically the same, but UTC is more precise and is based on atomic clocks.',
+            timezone_title: 'Timezone',
+            timezone_desc: 'A timezone is a region on Earth that uses the same standard time. Different timezones have different offsets relative to UTC, for example, China Standard Time is UTC+8.',
+            leap_title: 'Leap Second',
+            leap_desc: 'A leap second is an extra second occasionally added to compensate for changes in the Earth\'s rotation speed. In most computer systems, leap seconds are usually ignored.'
+        },
+        examples: {
+            title: 'Code Examples for Getting Current Unix Timestamp'
+        },
+        footer: {
+            copyright: '© 2025 MRZ | Client-side Tool for Developers'
+        },
+        messages: {
+            copied: 'Copied',
+            parse_timestamp_sec: 'Parsed as second-level timestamp',
+            parse_timestamp_ms: 'Parsed as millisecond-level timestamp',
+            parse_timestamp_sec_32: 'Parsed as second-level (32-bit compatible) timestamp',
+            parse_date: 'Parsed as date time',
+            parse_error: 'Unable to parse input, please check format',
+            error_before_epoch: 'Date is before Unix epoch (1970-01-01 00:00:00 UTC)',
+            error_invalid_format: 'Unrecognized date format',
+            error_year_range: 'Year should be in the range 1970-9999 (64-bit timestamp support)',
+            error_month_range: 'Month should be in the range 1-12',
+            error_day_range: 'Day should be in the range 1-31',
+            error_hour_range: 'Hour should be in the range 0-23',
+            error_minute_range: 'Minute should be in the range 0-59',
+            error_second_range: 'Second should be in the range 0-59',
+            batch_error_before_epoch: 'Error: Timestamp "{0}" is before Unix epoch',
+            batch_error_out_of_range: 'Error: Timestamp "{0}" exceeds JavaScript Date object safe range',
+            batch_error_cannot_parse: 'Error: Cannot parse "{0}"',
+            batch_64bit_note: '(64-bit timestamp, exceeds 32-bit range)'
+        }
+    }
+};
+
 class UnixTimestampConverter {
     constructor() {
-        this.initializeElements();
-        this.bindEvents();
-        this.loadTheme();
-        this.startCurrentTimeUpdate();
-        this.initializeTabs();
-        this.initializeModal();
-
         // 时间更新控制
         this.isPaused = false;
         this.updateInterval = null;
         this.pausedTime = null;
+        
+        // 多语言控制
+        this.currentLanguage = localStorage.getItem('language') || 'zh';
+        
+        this.initializeElements();
+        this.bindEvents();
+        this.loadTheme();
+        this.loadLanguage();
+        this.startCurrentTimeUpdate();
+        this.initializeTabs();
+        this.initializeModal();
     }
 
     initializeElements() {
@@ -37,6 +219,7 @@ class UnixTimestampConverter {
 
         // 控制元素
         this.themeToggle = document.getElementById('themeToggle');
+        this.languageToggle = document.getElementById('languageToggle');
         this.knowledgeBtn = document.getElementById('knowledgeBtn');
         this.codeBtn = document.getElementById('codeBtn');
 
@@ -47,6 +230,9 @@ class UnixTimestampConverter {
     bindEvents() {
         // 主题切换
         this.themeToggle.addEventListener('click', () => this.toggleTheme());
+
+        // 语言切换
+        this.languageToggle.addEventListener('click', () => this.toggleLanguage());
 
         // 时间暂停/恢复
         this.pauseBtn.addEventListener('click', () => this.togglePause());
@@ -106,6 +292,68 @@ class UnixTimestampConverter {
         this.themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
     }
 
+    loadLanguage() {
+        this.applyLanguage(this.currentLanguage);
+    }
+
+    toggleLanguage() {
+        const newLanguage = this.currentLanguage === 'zh' ? 'en' : 'zh';
+        this.applyLanguage(newLanguage);
+        localStorage.setItem('language', newLanguage);
+        this.currentLanguage = newLanguage;
+    }
+
+    applyLanguage(language) {
+        const translations = i18nData[language];
+        if (!translations) return;
+
+        // 更新所有带有 data-i18n 属性的元素
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            const text = this.getNestedProperty(translations, key);
+            if (text) {
+                element.textContent = text;
+            }
+        });
+
+        // 更新所有带有 data-i18n-title 属性的元素的title
+        document.querySelectorAll('[data-i18n-title]').forEach(element => {
+            const key = element.getAttribute('data-i18n-title');
+            const text = this.getNestedProperty(translations, key);
+            if (text) {
+                element.title = text;
+            }
+        });
+
+        // 更新所有带有 data-i18n-placeholder 属性的元素的placeholder
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+            const key = element.getAttribute('data-i18n-placeholder');
+            const text = this.getNestedProperty(translations, key);
+            if (text) {
+                element.placeholder = text;
+            }
+        });
+
+        // 更新暂停按钮的文本和title
+        this.updatePauseButtonText();
+
+        // 更新语言切换按钮的title
+        this.languageToggle.textContent = language === 'zh' ? 'EN' : '中';
+    }
+
+    getNestedProperty(obj, path) {
+        return path.split('.').reduce((current, prop) => current && current[prop], obj);
+    }
+
+    updatePauseButtonText() {
+        const translations = i18nData[this.currentLanguage];
+        if (this.isPaused) {
+            this.pauseBtn.title = translations.current.resume;
+        } else {
+            this.pauseBtn.title = translations.current.pause;
+        }
+    }
+
     startCurrentTimeUpdate() {
         const updateCurrentTime = () => {
             let now;
@@ -136,19 +384,21 @@ class UnixTimestampConverter {
     }
 
     togglePause() {
+        const translations = i18nData[this.currentLanguage];
+        
         if (this.isPaused) {
             // 恢复计时
             this.isPaused = false;
             this.pausedTime = null;
             this.pauseBtn.textContent = '⏸️';
-            this.pauseBtn.title = '暂停时间更新';
+            this.pauseBtn.title = translations.current.pause;
             this.pauseBtn.classList.remove('paused');
         } else {
             // 暂停计时
             this.isPaused = true;
             this.pausedTime = new Date(); // 记录暂停时的确切时间
             this.pauseBtn.textContent = '▶️';
-            this.pauseBtn.title = '恢复时间更新';
+            this.pauseBtn.title = translations.current.resume;
             this.pauseBtn.classList.add('paused');
         }
     }
