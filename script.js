@@ -61,7 +61,58 @@ const i18nData = {
             leap_desc: '闰秒是为了补偿地球自转速度变化而偶尔添加的额外秒数。在大多数计算机系统中，闰秒通常被忽略。'
         },
         examples: {
-            title: '获取当前Unix时间戳的代码示例'
+            title: '获取当前Unix时间戳的代码示例',
+            python: {
+                comment1: '# 获取当前时间戳（秒）',
+                comment2: '# 获取当前时间戳（毫秒）',
+                comment3: '# 使用datetime模块'
+            },
+            cpp: {
+                comment1: '// 获取当前时间戳（秒）',
+                comment2: '// 获取当前时间戳（毫秒）'
+            },
+            c: {
+                comment1: '// 获取当前时间戳（秒）',
+                comment2: '// 获取当前时间戳（毫秒）'
+            },
+            java: {
+                comment1: '// 获取当前时间戳（秒）',
+                comment2: '// 获取当前时间戳（毫秒）',
+                comment3: '// 使用Java 8+ API'
+            },
+            csharp: {
+                comment1: '// 获取当前时间戳（秒）',
+                comment2: '// 获取当前时间戳（毫秒）',
+                comment3: '// 传统方法'
+            },
+            javascript: {
+                comment1: '// 获取当前时间戳（秒）',
+                comment2: '// 获取当前时间戳（毫秒）',
+                comment3: '// 使用new Date()'
+            },
+            go: {
+                comment1: '// 获取当前时间戳（秒）',
+                comment2: '// 获取当前时间戳（毫秒）',
+                comment3: '// 获取当前时间戳（纳秒）'
+            },
+            perl: {
+                comment1: '# 获取当前时间戳（秒）',
+                comment2: '# 获取当前时间戳（毫秒）',
+                comment3: '# 使用内置time函数'
+            },
+            pascal: {
+                comment1: '// 获取当前时间戳（秒）',
+                comment2: '// 获取当前时间戳（毫秒）'
+            },
+            fortran: {
+                comment1: '! 获取当前时间戳（需要系统调用）',
+                comment2: '! 或使用date_and_time内置函数'
+            },
+            sql: {
+                comment1: '-- MySQL',
+                comment2: '-- PostgreSQL',
+                comment3: '-- SQL Server'
+            }
         },
         footer: {
             copyright: '© 2025 MRZ | 开发者客户端工具'
@@ -148,7 +199,58 @@ const i18nData = {
             leap_desc: 'A leap second is an extra second occasionally added to compensate for changes in the Earth\'s rotation speed. In most computer systems, leap seconds are usually ignored.'
         },
         examples: {
-            title: 'Code Examples for Getting Current Unix Timestamp'
+            title: 'Code Examples for Getting Current Unix Timestamp',
+            python: {
+                comment1: '# Get current timestamp (seconds)',
+                comment2: '# Get current timestamp (milliseconds)',
+                comment3: '# Using datetime module'
+            },
+            cpp: {
+                comment1: '// Get current timestamp (seconds)',
+                comment2: '// Get current timestamp (milliseconds)'
+            },
+            c: {
+                comment1: '// Get current timestamp (seconds)',
+                comment2: '// Get current timestamp (milliseconds)'
+            },
+            java: {
+                comment1: '// Get current timestamp (seconds)',
+                comment2: '// Get current timestamp (milliseconds)',
+                comment3: '// Using Java 8+ API'
+            },
+            csharp: {
+                comment1: '// Get current timestamp (seconds)',
+                comment2: '// Get current timestamp (milliseconds)',
+                comment3: '// Traditional method'
+            },
+            javascript: {
+                comment1: '// Get current timestamp (seconds)',
+                comment2: '// Get current timestamp (milliseconds)',
+                comment3: '// Using new Date()'
+            },
+            go: {
+                comment1: '// Get current timestamp (seconds)',
+                comment2: '// Get current timestamp (milliseconds)',
+                comment3: '// Get current timestamp (nanoseconds)'
+            },
+            perl: {
+                comment1: '# Get current timestamp (seconds)',
+                comment2: '# Get current timestamp (milliseconds)',
+                comment3: '# Using built-in time function'
+            },
+            pascal: {
+                comment1: '// Get current timestamp (seconds)',
+                comment2: '// Get current timestamp (milliseconds)'
+            },
+            fortran: {
+                comment1: '! Get current timestamp (requires system call)',
+                comment2: '! Or use date_and_time built-in function'
+            },
+            sql: {
+                comment1: '-- MySQL',
+                comment2: '-- PostgreSQL',
+                comment3: '-- SQL Server'
+            }
         },
         footer: {
             copyright: '© 2025 MRZ | Client-side Tool for Developers'
@@ -173,6 +275,172 @@ const i18nData = {
             batch_error_cannot_parse: 'Error: Cannot parse "{0}"',
             batch_64bit_note: '(64-bit timestamp, exceeds 32-bit range)'
         }
+    }
+};
+
+// 代码示例模板
+const codeTemplates = {
+    python: {
+        title: 'Python',
+        code: `import time
+import datetime
+
+{comment1}
+timestamp_sec = int(time.time())
+
+{comment2}
+timestamp_ms = int(time.time() * 1000)
+
+{comment3}
+timestamp_sec_dt = int(datetime.datetime.now().timestamp())`
+    },
+    cpp: {
+        title: 'C++',
+        code: `#include <chrono>
+#include <iostream>
+
+{comment1}
+auto timestampSec = std::chrono::duration_cast<std::chrono::seconds>
+    (std::chrono::system_clock::now().time_since_epoch()).count();
+
+{comment2}
+auto timestampMs = std::chrono::duration_cast<std::chrono::milliseconds>
+    (std::chrono::system_clock::now().time_since_epoch()).count();`
+    },
+    c: {
+        title: 'C',
+        code: `#include <time.h>
+#include <sys/time.h>
+
+{comment1}
+time_t timestamp_sec = time(NULL);
+
+{comment2}
+struct timeval tv;
+gettimeofday(&tv, NULL);
+long long timestamp_ms = tv.tv_sec * 1000LL + tv.tv_usec / 1000;`
+    },
+    java: {
+        title: 'Java',
+        code: `import java.time.Instant;
+
+{comment1}
+long timestampSec = System.currentTimeMillis() / 1000;
+
+{comment2}
+long timestampMs = System.currentTimeMillis();
+
+{comment3}
+long timestampSecJava8 = Instant.now().getEpochSecond();
+long timestampMsJava8 = Instant.now().toEpochMilli();`
+    },
+    csharp: {
+        title: 'C#',
+        code: `using System;
+
+{comment1}
+long timestampSec = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+
+{comment2}
+long timestampMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+{comment3}
+DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+long timestampSecOld = (long)(DateTime.UtcNow - epoch).TotalSeconds;`
+    },
+    javascript: {
+        title: 'JavaScript',
+        code: `{comment1}
+const timestampSec = Math.floor(Date.now() / 1000);
+
+{comment2}
+const timestampMs = Date.now();
+
+{comment3}
+const timestampSecAlt = Math.floor(new Date().getTime() / 1000);`
+    },
+    go: {
+        title: 'Go',
+        code: `package main
+
+import (
+    "time"
+    "fmt"
+)
+
+func main() {
+    {comment1}
+    timestampSec := time.Now().Unix()
+    
+    {comment2}
+    timestampMs := time.Now().UnixMilli()
+    
+    {comment3}
+    timestampNs := time.Now().UnixNano()
+}`
+    },
+    perl: {
+        title: 'Perl',
+        code: `use Time::HiRes qw(time);
+
+{comment1}
+my $timestamp_sec = int(time());
+
+{comment2}
+my $timestamp_ms = int(time() * 1000);
+
+{comment3}
+my $timestamp_builtin = time();`
+    },
+    pascal: {
+        title: 'Delphi/Object Pascal',
+        code: `uses
+  System.DateUtils, System.SysUtils;
+
+var
+  TimestampSec: Int64;
+  TimestampMs: Int64;
+  UnixEpoch: TDateTime;
+
+begin
+  {comment1}
+  TimestampSec := DateTimeToUnix(Now);
+  
+  {comment2}
+  UnixEpoch := EncodeDate(1970, 1, 1);
+  TimestampMs := MilliSecondsBetween(Now, UnixEpoch);
+end;`
+    },
+    fortran: {
+        title: 'Fortran',
+        code: `program unix_timestamp
+    implicit none
+    integer :: timestamp_sec
+    character(len=20) :: date_string
+    
+    {comment1}
+    call system_clock(timestamp_sec)
+    
+    {comment2}
+    call date_and_time(date=date_string)
+    
+end program unix_timestamp`
+    },
+    sql: {
+        title: {
+            zh: 'SQL (通用)',
+            en: 'SQL (General)'
+        },
+        code: `{comment1}
+SELECT UNIX_TIMESTAMP() AS timestamp_sec;
+SELECT UNIX_TIMESTAMP() * 1000 AS timestamp_ms;
+
+{comment2}
+SELECT EXTRACT(EPOCH FROM NOW()) AS timestamp_sec;
+SELECT EXTRACT(EPOCH FROM NOW()) * 1000 AS timestamp_ms;
+
+{comment3}
+SELECT DATEDIFF(SECOND, '1970-01-01', GETUTCDATE()) AS timestamp_sec;`
     }
 };
 
@@ -298,9 +566,9 @@ class UnixTimestampConverter {
 
     toggleLanguage() {
         const newLanguage = this.currentLanguage === 'zh' ? 'en' : 'zh';
+        this.currentLanguage = newLanguage;
         this.applyLanguage(newLanguage);
         localStorage.setItem('language', newLanguage);
-        this.currentLanguage = newLanguage;
     }
 
     applyLanguage(language) {
@@ -339,6 +607,14 @@ class UnixTimestampConverter {
 
         // 更新语言切换按钮的title
         this.languageToggle.textContent = language === 'zh' ? 'EN' : '中';
+
+        // 更新代码示例
+        this.generateCodeExamples(language);
+        
+        // 更新复制按钮文本
+        document.querySelectorAll('#codeExamples .copy-btn').forEach(btn => {
+            btn.textContent = translations.smart.copy;
+        });
     }
 
     getNestedProperty(obj, path) {
@@ -352,6 +628,70 @@ class UnixTimestampConverter {
         } else {
             this.pauseBtn.title = translations.current.pause;
         }
+    }
+
+    generateCodeExamples(language = this.currentLanguage) {
+        const translations = i18nData[language];
+        const codeExamplesContainer = document.getElementById('codeExamples');
+        
+        if (!codeExamplesContainer) return;
+        
+        codeExamplesContainer.innerHTML = '';
+        
+        Object.keys(codeTemplates).forEach(lang => {
+            const template = codeTemplates[lang];
+            const comments = translations.examples[lang];
+            
+            if (!comments) return;
+            
+            // 获取标题
+            let title = template.title;
+            if (typeof title === 'object') {
+                title = title[language] || title.zh;
+            }
+            
+            // 替换注释占位符
+            let code = template.code;
+            Object.keys(comments).forEach(key => {
+                code = code.replace(`{${key}}`, comments[key]);
+            });
+            
+            const codeExample = document.createElement('div');
+            codeExample.className = 'code-example';
+            
+            codeExample.innerHTML = `
+                <h4>${title}</h4>
+                <pre><code>${this.escapeHtml(code)}</code></pre>
+                <button class="copy-btn" data-copy-code="${lang}" data-i18n="smart.copy">复制</button>
+            `;
+            
+            codeExamplesContainer.appendChild(codeExample);
+        });
+        
+        // 重新绑定复制按钮事件
+        this.bindCopyButtons();
+    }
+
+    updateCodeExamples() {
+        this.generateCodeExamples(this.currentLanguage);
+        
+        // 更新复制按钮文本
+        const translations = i18nData[this.currentLanguage];
+        document.querySelectorAll('#codeExamples .copy-btn').forEach(btn => {
+            btn.textContent = translations.smart.copy;
+        });
+    }
+
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    bindCopyButtons() {
+        document.querySelectorAll('#codeExamples [data-copy-code]').forEach(btn => {
+            btn.addEventListener('click', (e) => this.handleCopy(e));
+        });
     }
 
     startCurrentTimeUpdate() {
@@ -724,8 +1064,9 @@ class UnixTimestampConverter {
 
         if (textToCopy) {
             navigator.clipboard.writeText(textToCopy).then(() => {
+                const translations = i18nData[this.currentLanguage];
                 const originalText = btn.textContent;
-                btn.textContent = '已复制';
+                btn.textContent = translations.messages.copied;
                 btn.classList.add('success');
 
                 setTimeout(() => {
@@ -786,6 +1127,9 @@ class UnixTimestampConverter {
     }
 
     initializeModal() {
+        // 生成代码示例
+        this.generateCodeExamples();
+        
         // 为代码示例添加复制按钮事件
         setTimeout(() => {
             document.querySelectorAll('[data-copy-code]').forEach(btn => {
