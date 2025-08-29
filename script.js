@@ -282,6 +282,7 @@ const i18nData = {
 const codeTemplates = {
     python: {
         title: 'Python',
+        language: 'python',
         code: `import time
 import datetime
 
@@ -296,6 +297,7 @@ timestamp_sec_dt = int(datetime.datetime.now().timestamp())`
     },
     cpp: {
         title: 'C++',
+        language: 'cpp',
         code: `#include <chrono>
 #include <iostream>
 
@@ -309,6 +311,7 @@ auto timestampMs = std::chrono::duration_cast<std::chrono::milliseconds>
     },
     c: {
         title: 'C',
+        language: 'c',
         code: `#include <time.h>
 #include <sys/time.h>
 
@@ -322,6 +325,7 @@ long long timestamp_ms = tv.tv_sec * 1000LL + tv.tv_usec / 1000;`
     },
     java: {
         title: 'Java',
+        language: 'java',
         code: `import java.time.Instant;
 
 {comment1}
@@ -336,6 +340,7 @@ long timestampMsJava8 = Instant.now().toEpochMilli();`
     },
     csharp: {
         title: 'C#',
+        language: 'csharp',
         code: `using System;
 
 {comment1}
@@ -350,6 +355,7 @@ long timestampSecOld = (long)(DateTime.UtcNow - epoch).TotalSeconds;`
     },
     javascript: {
         title: 'JavaScript',
+        language: 'javascript',
         code: `{comment1}
 const timestampSec = Math.floor(Date.now() / 1000);
 
@@ -361,6 +367,7 @@ const timestampSecAlt = Math.floor(new Date().getTime() / 1000);`
     },
     go: {
         title: 'Go',
+        language: 'go',
         code: `package main
 
 import (
@@ -381,6 +388,7 @@ func main() {
     },
     perl: {
         title: 'Perl',
+        language: 'perl',
         code: `use Time::HiRes qw(time);
 
 {comment1}
@@ -394,6 +402,7 @@ my $timestamp_builtin = time();`
     },
     pascal: {
         title: 'Delphi/Object Pascal',
+        language: 'pascal',
         code: `uses
   System.DateUtils, System.SysUtils;
 
@@ -413,6 +422,7 @@ end;`
     },
     fortran: {
         title: 'Fortran',
+        language: 'fortran',
         code: `program unix_timestamp
     implicit none
     integer :: timestamp_sec
@@ -431,6 +441,7 @@ end program unix_timestamp`
             zh: 'SQL (通用)',
             en: 'SQL (General)'
         },
+        language: 'sql',
         code: `{comment1}
 SELECT UNIX_TIMESTAMP() AS timestamp_sec;
 SELECT UNIX_TIMESTAMP() * 1000 AS timestamp_ms;
@@ -659,14 +670,22 @@ class UnixTimestampConverter {
             const codeExample = document.createElement('div');
             codeExample.className = 'code-example';
             
+            // 使用Prism.js语法高亮
+            const prismLanguage = template.language || 'markup';
+            
             codeExample.innerHTML = `
                 <h4>${title}</h4>
-                <pre><code>${this.escapeHtml(code)}</code></pre>
+                <pre><code class="language-${prismLanguage}">${this.escapeHtml(code)}</code></pre>
                 <button class="copy-btn" data-copy-code="${lang}" data-i18n="smart.copy">复制</button>
             `;
             
             codeExamplesContainer.appendChild(codeExample);
         });
+        
+        // 应用Prism.js语法高亮
+        if (typeof Prism !== 'undefined') {
+            Prism.highlightAllUnder(codeExamplesContainer);
+        }
         
         // 重新绑定复制按钮事件
         this.bindCopyButtons();
