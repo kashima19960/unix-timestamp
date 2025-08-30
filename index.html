@@ -129,17 +129,165 @@
             </div>
             <div class="modal-body">
                 <div id="conceptsTab" class="modal-tab-content active">
-                    <h3 data-i18n="concepts.unix_title">什么是Unix时间戳？</h3>
-                    <p data-i18n="concepts.unix_desc">Unix时间戳是从1970年1月1日00:00:00 UTC（被称为"Unix纪元"或"Epoch"）开始所经过的秒数。它是一个标准的时间表示方法，广泛用于计算机系统中。</p>
+                    <div class="knowledge-section">
+                        <h3 data-i18n="concepts.unix_title">Unix时间戳 - 时间的数字化表示</h3>
+                        <div class="concept-detail">
+                            <p data-i18n="concepts.unix_desc">Unix时间戳（Unix Timestamp），也称为POSIX时间戳或Epoch时间，是从1970年1月1日00:00:00 UTC（协调世界时）开始所经过的秒数。这个起点被称为"Unix纪元"（Unix Epoch）。</p>
+                            
+                            <div class="technical-details">
+                                <h4 data-i18n="concepts.unix_details_title">技术细节</h4>
+                                <ul>
+                                    <li data-i18n="concepts.unix_detail_1"><strong>精度范围：</strong>标准32位系统支持1970年至2038年（Y2038问题），64位系统可支持数十亿年</li>
+                                    <li data-i18n="concepts.unix_detail_2"><strong>单位变化：</strong>传统为秒，现代系统常用毫秒（13位）、微秒（16位）或纳秒（19位）</li>
+                                    <li data-i18n="concepts.unix_detail_3"><strong>存储格式：</strong>通常为有符号整数，负值表示1970年之前的时间</li>
+                                    <li data-i18n="concepts.unix_detail_4"><strong>时区无关：</strong>本质上是UTC时间，显示时需要根据时区进行转换</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
-                    <h3 data-i18n="concepts.utc_title">UTC vs GMT</h3>
-                    <p data-i18n="concepts.utc_desc">UTC（协调世界时）是现代标准时间，而GMT（格林威治标准时间）是历史标准。在日常使用中，两者基本相同，但UTC更加精确，是基于原子钟的。</p>
+                    <div class="knowledge-section">
+                        <h3 data-i18n="concepts.history_title">历史背景与发展</h3>
+                        <div class="concept-detail">
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <span class="timeline-date">1969</span>
+                                    <p data-i18n="concepts.history_1969">Unix操作系统诞生，需要统一的时间表示方法</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <span class="timeline-date">1970</span>
+                                    <p data-i18n="concepts.history_1970">确定1970年1月1日为Unix纪元起点，便于计算机处理</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <span class="timeline-date">1988</span>
+                                    <p data-i18n="concepts.history_1988">IEEE 1003.1标准化Unix时间戳格式</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <span class="timeline-date">2038</span>
+                                    <p data-i18n="concepts.history_2038">32位系统面临Y2038问题，需要升级到64位</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <h3 data-i18n="concepts.timezone_title">时区 (Timezone)</h3>
-                    <p data-i18n="concepts.timezone_desc">时区是地球上使用相同标准时间的区域。不同时区相对于UTC有不同的偏移量，例如中国标准时间是UTC+8。</p>
+                    <div class="knowledge-section">
+                        <h3 data-i18n="concepts.formats_title">时间戳格式详解</h3>
+                        <div class="concept-detail">
+                            <div class="format-comparison">
+                                <div class="format-item">
+                                    <h4 data-i18n="concepts.format_seconds">秒级时间戳（10位）</h4>
+                                    <p data-i18n="concepts.format_seconds_desc">标准Unix时间戳，范围：1970-2038年</p>
+                                    <code>1735689600</code>
+                                </div>
+                                <div class="format-item">
+                                    <h4 data-i18n="concepts.format_milliseconds">毫秒级时间戳（13位）</h4>
+                                    <p data-i18n="concepts.format_milliseconds_desc">JavaScript等语言常用，提供毫秒精度</p>
+                                    <code>1735689600000</code>
+                                </div>
+                                <div class="format-item">
+                                    <h4 data-i18n="concepts.format_microseconds">微秒级时间戳（16位）</h4>
+                                    <p data-i18n="concepts.format_microseconds_desc">数据库和高精度应用使用</p>
+                                    <code>1735689600000000</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <h3 data-i18n="concepts.leap_title">闰秒</h3>
-                    <p data-i18n="concepts.leap_desc">闰秒是为了补偿地球自转速度变化而偶尔添加的额外秒数。在大多数计算机系统中，闰秒通常被忽略。</p>
+                    <div class="knowledge-section">
+                        <h3 data-i18n="concepts.utc_title">UTC、GMT与时区系统</h3>
+                        <div class="concept-detail">
+                            <div class="time-standards">
+                                <div class="standard-item">
+                                    <h4 data-i18n="concepts.utc_standard">UTC (协调世界时)</h4>
+                                    <p data-i18n="concepts.utc_desc">基于原子钟的现代时间标准，是Unix时间戳的基准。不受夏令时影响，全球统一。</p>
+                                </div>
+                                <div class="standard-item">
+                                    <h4 data-i18n="concepts.gmt_standard">GMT (格林威治标准时间)</h4>
+                                    <p data-i18n="concepts.gmt_desc">历史上的时间标准，基于地球自转。在民用场合与UTC几乎相同，但科学应用中已被UTC取代。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="timezone-explanation">
+                                <h4 data-i18n="concepts.timezone_system">时区系统原理</h4>
+                                <p data-i18n="concepts.timezone_desc">地球被分为24个时区，每个时区相差15度经度（1小时）。时区偏移以UTC为基准表示：</p>
+                                <ul>
+                                    <li data-i18n="concepts.timezone_example_1"><strong>UTC+8：</strong>中国标准时间、新加坡时间</li>
+                                    <li data-i18n="concepts.timezone_example_2"><strong>UTC-5：</strong>美国东部标准时间</li>
+                                    <li data-i18n="concepts.timezone_example_3"><strong>UTC+0：</strong>英国标准时间（冬季）</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="knowledge-section">
+                        <h3 data-i18n="concepts.challenges_title">技术挑战与解决方案</h3>
+                        <div class="concept-detail">
+                            <div class="challenge-item">
+                                <h4 data-i18n="concepts.y2038_title">Y2038问题</h4>
+                                <p data-i18n="concepts.y2038_desc">32位系统在2038年1月19日03:14:07 UTC后会发生整数溢出，解决方案是升级到64位系统。</p>
+                            </div>
+                            
+                            <div class="challenge-item">
+                                <h4 data-i18n="concepts.leap_title">闰秒处理</h4>
+                                <p data-i18n="concepts.leap_desc">由于地球自转不规律，国际地球自转和参考系统服务会不定期添加闰秒。Unix时间戳通常忽略闰秒，保持连续性。</p>
+                            </div>
+                            
+                            <div class="challenge-item">
+                                <h4 data-i18n="concepts.dst_title">夏令时处理</h4>
+                                <p data-i18n="concepts.dst_desc">夏令时会改变本地时间与UTC的偏移量。Unix时间戳基于UTC，不受夏令时影响，但转换为本地时间时需要考虑。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="knowledge-section">
+                        <h3 data-i18n="concepts.best_practices_title">最佳实践与建议</h3>
+                        <div class="concept-detail">
+                            <div class="practices-grid">
+                                <div class="practice-item">
+                                    <h4 data-i18n="concepts.practice_storage">存储建议</h4>
+                                    <ul>
+                                        <li data-i18n="concepts.practice_storage_1">数据库中始终存储UTC时间戳</li>
+                                        <li data-i18n="concepts.practice_storage_2">使用64位整数避免Y2038问题</li>
+                                        <li data-i18n="concepts.practice_storage_3">根据需求选择秒级或毫秒级精度</li>
+                                    </ul>
+                                </div>
+                                <div class="practice-item">
+                                    <h4 data-i18n="concepts.practice_conversion">转换建议</h4>
+                                    <ul>
+                                        <li data-i18n="concepts.practice_conversion_1">显示时再转换为用户时区</li>
+                                        <li data-i18n="concepts.practice_conversion_2">使用标准库进行时区转换</li>
+                                        <li data-i18n="concepts.practice_conversion_3">避免手动计算时区偏移</li>
+                                    </ul>
+                                </div>
+                                <div class="practice-item">
+                                    <h4 data-i18n="concepts.practice_api">API设计建议</h4>
+                                    <ul>
+                                        <li data-i18n="concepts.practice_api_1">使用ISO 8601格式进行数据交换</li>
+                                        <li data-i18n="concepts.practice_api_2">明确指定时间戳的单位和时区</li>
+                                        <li data-i18n="concepts.practice_api_3">提供多种格式的时间表示</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="knowledge-section">
+                        <h3 data-i18n="concepts.common_issues_title">常见问题与解答</h3>
+                        <div class="concept-detail">
+                            <div class="faq-item">
+                                <h4 data-i18n="concepts.faq_negative">为什么有负数时间戳？</h4>
+                                <p data-i18n="concepts.faq_negative_answer">负数时间戳表示1970年1月1日之前的时间。例如-86400表示1969年12月31日00:00:00 UTC。</p>
+                            </div>
+                            <div class="faq-item">
+                                <h4 data-i18n="concepts.faq_precision">如何选择时间戳精度？</h4>
+                                <p data-i18n="concepts.faq_precision_answer">秒级适用于日常应用，毫秒级适用于实时系统，微秒级适用于高频交易，纳秒级适用于科学计算。</p>
+                            </div>
+                            <div class="faq-item">
+                                <h4 data-i18n="concepts.faq_float">为什么有小数时间戳？</h4>
+                                <p data-i18n="concepts.faq_float_answer">小数部分表示亚秒精度。例如1735689600.500表示额外的500毫秒。</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="examplesTab" class="modal-tab-content">
                     <h3 data-i18n="examples.title">获取当前Unix时间戳的代码示例</h3>

@@ -657,6 +657,336 @@ body {
     font-size: 0.875rem;
 }
 
+/* 增强知识中心样式 */
+.knowledge-section {
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+}
+
+.knowledge-section h3 {
+    background: linear-gradient(135deg, var(--accent-color), #0056b3);
+    color: white;
+    margin: 0;
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.concept-detail {
+    padding: 1.5rem;
+    background-color: var(--bg-primary);
+}
+
+.concept-detail p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+/* 技术细节样式 */
+.technical-details {
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.technical-details h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.technical-details ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.technical-details li {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.technical-details li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+/* 时间线样式 */
+.timeline {
+    position: relative;
+    margin-top: 1rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent-color), var(--accent-hover));
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding-left: 3rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0.125rem;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    border: 3px solid var(--bg-primary);
+}
+
+.timeline-date {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-item p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* 格式比较样式 */
+.format-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.format-item {
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border-left: 4px solid var(--accent-color);
+}
+
+.format-item h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.format-item p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.format-item code {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+/* 时间标准样式 */
+.time-standards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.standard-item {
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.standard-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+}
+
+.standard-item h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.standard-item p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 时区解释样式 */
+.timezone-explanation {
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.timezone-explanation h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.75rem;
+}
+
+.timezone-explanation ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.75rem;
+}
+
+.timezone-explanation li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.timezone-explanation li::before {
+    content: "🌍";
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* 挑战项目样式 */
+.challenge-item {
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--error-color);
+}
+
+.challenge-item h4 {
+    color: var(--error-color);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.challenge-item h4::before {
+    content: "⚠️";
+    font-size: 1.125rem;
+}
+
+.challenge-item p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 最佳实践网格 */
+.practices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.practice-item {
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    border-top: 4px solid var(--success-color);
+}
+
+.practice-item h4 {
+    color: var(--success-color);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.practice-item h4::before {
+    content: "💡";
+    font-size: 1.125rem;
+}
+
+.practice-item ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.practice-item li {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.practice-item li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+/* FAQ样式 */
+.faq-item {
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--accent-color);
+}
+
+.faq-item h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.faq-item h4::before {
+    content: "❓";
+    font-size: 1rem;
+}
+
+.faq-item p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .header {
@@ -748,5 +1078,47 @@ body {
         font-size: 0.875rem;
         min-height: 2rem;
         padding: 0.375rem;
+    }
+
+    .format-comparison,
+    .time-standards,
+    .practices-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .timeline::before {
+        left: 0.75rem;
+    }
+    
+    .timeline-item {
+        padding-left: 2.5rem;
+    }
+    
+    .timeline-item::before {
+        left: 0.25rem;
+        width: 0.75rem;
+        height: 0.75rem;
+    }
+    
+    .knowledge-section h3 {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+    
+    .concept-detail {
+        padding: 1rem;
+    }
+
+    .modal-body {
+        max-height: 70vh;
+    }
+    
+    .knowledge-section {
+        margin-bottom: 1.5rem;
+    }
+    
+    .timeline-date {
+        font-size: 0.75rem;
+        padding: 0.125rem 0.5rem;
     }
 }
